@@ -302,9 +302,9 @@
         id: "art-02",
         topic: "classification",
         topicName: "Fibrous Joints (9.2)",
-        passage: "Fibrous joints are joined directly by collagen fibers with no cavity. Sutures unite skull bones. Syndesmoses connect bones via ligaments or interosseous membranes (e.g., radioulnar shaft). Gomphoses are peg-and-socket joints anchoring tooth roots into alveolar sockets via periodontal ligaments.",
+        passage: "Fibrous joints are joined directly by collagen fibers with no cavity. Sutures unite skull bones. Syndesmoses connect bones via ligaments or interosseous membranes (e.g., radioulnar shaft). Gomphoses are peg-and-socket joints anchoring tooth roots into alveolar sockets.",
         readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-2-fibrous-joints",
-        prompt: "The periodontal ligament anchors the root of each tooth into its alveolar socket, forming which fibrous joint?",
+        prompt: "The peg-and-socket fibrous joint that securely anchors the root of each tooth into its alveolar socket is classified as a:",
         options: ["Gomphosis", "Syndesmosis", "Suture", "Synchondrosis"],
         correct: 0,
         explanation: "A gomphosis is the specialized peg-and-socket fibrous joint binding teeth into the mandible and maxillae."
@@ -368,12 +368,17 @@
         id: "art-08",
         topic: "joints",
         topicName: "Knee Joint Anatomy (9.6)",
-        passage: "The knee joint is stabilized by extracapsular ligaments (tibial and fibular collaterals) and two intracapsular cruciate ligaments. The anterior cruciate ligament (ACL) tightens during knee extension to prevent hyperextension and tibial anterior sliding.",
+        passage: "The femorotibial joint relies heavily on internal fibrocartilaginous pads called menisci. These C-shaped structures sit on the tibial condyles to provide shock absorption and deepen the articular surface for the femoral condyles.",
         readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "Which ligament prevents anterior displacement of the tibia relative to the femur?",
-        options: ["Anterior cruciate ligament (ACL)", "Posterior cruciate ligament (PCL)", "Tibial collateral ligament", "Fibular collateral ligament"],
+        prompt: "What is the structural role of the menisci situated between the femur and tibia in the knee joint?",
+        options: [
+          "Providing C-shaped fibrocartilaginous pads for shock absorption and joint congruency",
+          "Secreting synovial fluid directly into the suprapatellar bursa",
+          "Preventing rotation of the fibular head",
+          "Uniting the patella directly to the tibial tuberosity"
+        ],
         correct: 0,
-        explanation: "The ACL resists anterior translation of the tibia and becomes taut to prevent hyperextension."
+        explanation: "The medial and lateral menisci are C-shaped fibrocartilage pads that absorb shock and enhance articulation congruency."
       },
       {
         id: "art-09",
@@ -381,14 +386,52 @@
         topicName: "Shoulder Joint (9.6)",
         passage: "The glenohumeral joint is a multiaxial ball-and-socket joint possessing the greatest mobility of any joint. Because the glenoid cavity is shallow, structural stability depends heavily on the glenoid labrum and four rotator cuff muscles (SITS).",
         readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "Which group of muscle tendons dynamic-stabilizes the humeral head within the shallow glenoid fossa?",
+        prompt: "Which group of muscle tendons provides dynamic stabilization to hold the humeral head within the shallow glenoid fossa?",
         options: ["Rotator cuff (SITS)", "Adductor group", "Quadriceps femoris", "Hamstring tendon complex"],
         correct: 0,
         explanation: "The supraspinatus, infraspinatus, teres minor, and subscapularis (SITS) form the rotator cuff, providing dynamic stability."
+      },
+      {
+        id: "art-10",
+        topic: "joints",
+        topicName: "Elbow Joint Anatomy (9.6)",
+        passage: "The humeroulnar joint is a uniaxial hinge joint allowing only flexion and extension of the forearm. The trochlea of the humerus fits snugly into the deep C-shaped trochlear notch of the ulna.",
+        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
+        prompt: "At the humeroulnar hinge joint, which specific humeral feature articulates with the trochlear notch of the ulna?",
+        options: ["Trochlea", "Capitulum", "Coronoid fossa", "Olecranon fossa"],
+        correct: 0,
+        explanation: "The spool-like trochlea of the humerus fits into the trochlear notch of the ulna to form the hinge joint."
+      },
+      {
+        id: "art-11",
+        topic: "joints",
+        topicName: "Fibrocartilaginous Labra (9.6)",
+        passage: "Both the glenohumeral joint and the acetabulofemoral (hip) joint utilize fibrocartilage rings attached to the socket rims known as the glenoid labrum and acetabular labrum to deepen their sockets.",
+        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
+        prompt: "What is the primary anatomical function of the acetabular and glenoid labra?",
+        options: [
+          "Fibrocartilaginous rims that deepen the ball-and-socket sockets to enhance stability",
+          "Avascular hyaline plates that produce interstitial fluid",
+          "Bursae designed to cushion friction beneath large tendons",
+          "Dense fibrous cords connecting the greater and lesser trochanters"
+        ],
+        correct: 0,
+        explanation: "The labra are fibrocartilaginous rims that deepen the glenoid cavity and acetabulum to stabilize ball-and-socket joints."
+      },
+      {
+        id: "art-12",
+        topic: "joints",
+        topicName: "Atlantoaxial Joint (9.6)",
+        passage: "The articulation between the atlas (C1) and axis (C2) consists of a pivot joint where the odontoid process (dens) of the axis rotates within the anterior ring of the atlas, allowing shaking of the head side-to-side.",
+        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
+        prompt: "The articulation between the atlas (C1) and the dens of the axis (C2) is classified mechanically as which type of joint?",
+        options: ["Pivot joint", "Saddle joint", "Hinge joint", "Condyloid joint"],
+        correct: 0,
+        explanation: "The atlantoaxial joint is a uniaxial pivot joint allowing rotational movement of the head."
       }
     ];
 
-    const STORAGE_KEY = "openstax_ap1_joints_mastery_v1";
+    const STORAGE_KEY = "openstax_ap1_joints_mastery_v2";
     let masteryData = loadMastery();
     let currentTopicFilter = "all";
     let activeQuestion = null;

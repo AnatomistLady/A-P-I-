@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A&amp;P Mastery Review: Articulations &amp; Joints (Dark Mode)</title>
+  <title>A&amp;P I Unit 3 Comprehensive Review: Articulations &amp; Muscles</title>
   <style>
     :root {
       --bg: #0b0f19;
@@ -11,23 +11,18 @@
       --card-border: #1f2937;
       --text: #f3f4f6;
       --text-muted: #9ca3af;
-      
       --primary: #38bdf8;
       --primary-hover: #0284c7;
       --header-bg: #0f172a;
       --header-border: #1e293b;
-      
       --accent: #f59e0b;
       --accent-hover: #d97706;
-      
       --correct: #34d399;
       --correct-bg: #064e3b;
       --correct-border: #059669;
-      
       --incorrect: #f87171;
       --incorrect-bg: #7f1d1d;
       --incorrect-border: #dc2626;
-      
       --focus-ring: #38bdf8;
     }
 
@@ -39,7 +34,7 @@
       line-height: 1.6;
       padding: 1.25rem;
     }
-    .container { max-width: 860px; margin: 0 auto; }
+    .container { max-width: 900px; margin: 0 auto; }
     
     header {
       background-color: var(--header-bg);
@@ -82,14 +77,10 @@
       background-color: var(--primary);
       color: #0b0f19;
     }
-    .filter-btn:focus-visible, button:focus-visible {
-      outline: 3px solid var(--focus-ring);
-      outline-offset: 2px;
-    }
 
     .stats-bar {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
       gap: 0.75rem;
       margin-bottom: 1.25rem;
     }
@@ -101,7 +92,7 @@
       text-align: center;
     }
     .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
     .quiz-card {
       background: var(--card-bg);
@@ -122,19 +113,6 @@
       color: #93c5fd;
       border: 1px solid #334155;
     }
-    .passage-box {
-      border-left: 4px solid var(--primary);
-      background-color: #0f172a;
-      padding: 1rem;
-      border-radius: 0 6px 6px 0;
-      margin-bottom: 1.25rem;
-      font-size: 0.95rem;
-      color: #cbd5e1;
-    }
-    .passage-box p { margin-bottom: 0.5rem; }
-    .passage-box strong { color: #f8fafc; }
-    .passage-box a { color: var(--primary); font-weight: 600; text-decoration: underline; }
-    .passage-box a:hover { color: #7dd3fc; }
     .question-prompt { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; color: #f9fafb; }
 
     .options-list {
@@ -224,17 +202,16 @@
 <body>
   <div class="container">
     <header role="banner">
-      <h1>A&amp;P I Mastery Arcade: Chapter 9 Articulations</h1>
-      <p>Aligned with OpenStax <em>Anatomy &amp; Physiology 2e</em>. Items exit your random rotation once mastered.</p>
+      <h1>Unit 3 Comprehensive Review: Articulations &amp; Muscles</h1>
+      <p>Aligned with OpenStax <em>Anatomy &amp; Physiology 2e</em> (Chapters 9, 10, &amp; 11). Exactly 100 questions. Items exit your random rotation once mastered.</p>
     </header>
 
     <div class="controls" role="region" aria-label="Filters and reset">
       <div class="filter-group" role="group" aria-label="Topic filter">
-        <button class="filter-btn active" data-topic="all">All Topics</button>
-        <button class="filter-btn" data-topic="classification">Classification (9.1-9.3)</button>
-        <button class="filter-btn" data-topic="synovial">Synovial Anatomy (9.4)</button>
-        <button class="filter-btn" data-topic="movements">Body Movements (9.5)</button>
-        <button class="filter-btn" data-topic="joints">Selected Joints (9.6)</button>
+        <button class="filter-btn active" data-topic="all">All (100)</button>
+        <button class="filter-btn" data-topic="ch9">Ch 9: Joints</button>
+        <button class="filter-btn" data-topic="ch10">Ch 10: Muscle Tissue</button>
+        <button class="filter-btn" data-topic="ch11">Ch 11: Muscular System</button>
       </div>
       <div>
         <button id="resetMasteryBtn" class="reset-link">Reset Mastery</button>
@@ -254,19 +231,15 @@
         <div id="statTotal" class="stat-value">0</div>
         <div class="stat-label">Total Questions</div>
       </div>
+      <div class="stat-card">
+        <div id="statPercent" class="stat-value">0%</div>
+        <div class="stat-label">Mastery Rate</div>
+      </div>
     </div>
 
     <main id="appWorkspace">
       <section id="questionCard" class="quiz-card" aria-live="polite">
         <span id="questionTag" class="badge">Topic</span>
-        
-        <div class="passage-box" id="passageContainer">
-          <p><strong>OpenStax Passage:</strong> <span id="passageText"></span></p>
-          <p>
-            <em>Deep Dive: </em><a id="readingLink" href="#" target="_blank" rel="noopener noreferrer">OpenStax Textbook Reference</a>
-          </p>
-        </div>
-
         <p class="question-prompt" id="questionPrompt"></p>
         <ul class="options-list" id="optionsList" role="radiogroup"></ul>
         <div id="feedbackBox" class="feedback-banner" role="alert"></div>
@@ -278,99 +251,147 @@
       </section>
 
       <section id="completedCard" class="quiz-card empty-state" style="display: none;">
-        <h2>Chapter 9 Mastered!</h2>
-        <p>You have successfully mastered every question in this selected category without repeat prompts.</p>
-        <p style="margin-top: 0.5rem; color: var(--text-muted);">Select another topic above or click "Reset Mastery" to practice again.</p>
+        <h2>All Selected Questions Mastered!</h2>
+        <p>You have successfully mastered every question in this category.</p>
+        <p style="margin-top: 0.5rem; color: var(--text-muted);">Choose another module above or click "Reset Mastery" to practice again.</p>
       </section>
     </main>
   </div>
 
   <script>
     const questionBank = [
+      /* ========================================================================= */
+      /* CHAPTER 9: ARTICULATIONS (QUESTIONS 1 - 33)                               */
+      /* ========================================================================= */
       {
-        id: "art-01",
-        topic: "classification",
-        topicName: "Joint Classification (9.1)",
-        passage: "Articulations are categorized structurally by their uniting medium and functionally by degree of mobility. Synarthroses are completely immobile joints (e.g., sutures). Amphiarthroses permit limited motion to absorb shock (e.g., intervertebral symphyses). Diarthroses are freely movable joints featuring a fluid-filled joint cavity.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-1-classification-of-joints",
-        prompt: "Functionally, all synovial joints in the human appendicular skeleton are classified as:",
-        options: ["Diarthroses", "Synarthroses", "Amphiarthroses", "Synchondroses"],
+        id: "q001", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The coronal suture of the skull is structurally classified as a fibrous suture and functionally classified as a(n):",
+        options: ["Synarthrosis", "Amphiarthrosis", "Diarthrosis", "Symphysis"],
         correct: 0,
-        explanation: "All synovial joints are freely movable and therefore classified functionally as diarthroses."
+        explanation: "Sutures are completely immobile fibrous joints, making them synarthroses."
       },
       {
-        id: "art-02",
-        topic: "classification",
-        topicName: "Fibrous Joints (9.2)",
-        passage: "Fibrous joints are joined directly by collagen fibers with no cavity. Sutures unite skull bones. Syndesmoses connect bones via ligaments or interosseous membranes (e.g., radioulnar shaft). Gomphoses are peg-and-socket joints anchoring tooth roots into alveolar sockets.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-2-fibrous-joints",
-        prompt: "The peg-and-socket fibrous joint that securely anchors the root of each tooth into its alveolar socket is classified as a:",
+        id: "q002", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The pubic symphysis unites the left and right hip bones with fibrocartilage and is functionally classified as a(n):",
+        options: ["Amphiarthrosis", "Synarthrosis", "Diarthrosis", "Synchondrosis"],
+        correct: 0,
+        explanation: "Symphyses provide slight mobility for shock absorption and are functionally amphiarthroses."
+      },
+      {
+        id: "q003", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The glenohumeral (shoulder) joint is structurally a ball-and-socket synovial joint and functionally classified as a(n):",
+        options: ["Diarthrosis", "Amphiarthrosis", "Synarthrosis", "Synostosis"],
+        correct: 0,
+        explanation: "All synovial joints are freely movable diarthroses."
+      },
+      {
+        id: "q004", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "An epiphyseal plate in a growing long bone is structurally a synchondrosis made of hyaline cartilage and functionally a(n):",
+        options: ["Synarthrosis", "Amphiarthrosis", "Diarthrosis", "Gomphosis"],
+        correct: 0,
+        explanation: "Epiphyseal plates are immobile synchondroses (synarthroses) until ossification."
+      },
+      {
+        id: "q005", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The interosseous membrane connecting the shafts of the radius and ulna is structurally a syndesmosis and functionally a(n):",
+        options: ["Amphiarthrosis", "Synarthrosis", "Diarthrosis", "Synchondrosis"],
+        correct: 0,
+        explanation: "Syndesmoses with wide fibrous sheets allow slight flexibility (amphiarthroses)."
+      },
+      {
+        id: "q006", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The dentoalveolar joint anchoring a tooth into its alveolar socket is structurally classified as a:",
         options: ["Gomphosis", "Syndesmosis", "Suture", "Synchondrosis"],
         correct: 0,
-        explanation: "A gomphosis is the specialized peg-and-socket fibrous joint binding teeth into the mandible and maxillae."
+        explanation: "The peg-and-socket fibrous articulation of a tooth is a gomphosis."
       },
       {
-        id: "art-03",
-        topic: "classification",
-        topicName: "Cartilaginous Joints (9.3)",
-        passage: "Cartilaginous joints lack a cavity and link bones via cartilage. Synchondroses unite bones with hyaline cartilage, such as the temporary epiphyseal plate and the first sternocostal joint. Symphyses unite bones using thick pads of fibrocartilage, such as the pubic symphysis.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-3-cartilaginous-joints",
-        prompt: "The temporary hyaline cartilage plate connecting the epiphysis and diaphysis in a growing long bone is a:",
-        options: ["Synchondrosis", "Symphysis", "Syndesmosis", "Diarthrosis"],
+        id: "q007", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The first sternocostal joint (between rib 1 and the manubrium) is structurally classified as a:",
+        options: ["Synchondrosis", "Symphysis", "Syndesmosis", "Plane synovial joint"],
         correct: 0,
-        explanation: "An epiphyseal plate is a synchondrosis, which ossifies into an epiphyseal line once longitudinal growth concludes."
+        explanation: "The first sternocostal articulation consists of hyaline cartilage, classifying it as a synchondrosis."
       },
       {
-        id: "art-04",
-        topic: "synovial",
-        topicName: "Synovial Anatomy (9.4)",
-        passage: "Synovial joints feature an articular capsule lined internally by the synovial membrane, which secretes slippery, nourishing synovial fluid. Friction is reduced by hyaline articular cartilage covering bone ends, along with extra-articular bursae and tendon sheaths.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
-        prompt: "Which tissue component lines the inner surface of the fibrous capsule and secretes synovial fluid?",
-        options: ["Synovial membrane", "Articular cartilage", "Endosteum", "Perichondrium"],
+        id: "q008", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The intervertebral joints uniting adjacent vertebral bodies are structurally classified as:",
+        options: ["Symphyses", "Synchondroses", "Syndesmoses", "Gomphoses"],
         correct: 0,
-        explanation: "The synovial membrane lines all internal surfaces of the capsule except where articular cartilage covers the bone ends."
+        explanation: "Vertebral bodies are joined by fibrocartilaginous discs, making them symphyses."
       },
       {
-        id: "art-05",
-        topic: "synovial",
-        topicName: "Synovial Joint Types (9.4)",
-        passage: "Synovial joints are classified by geometry: planar (gliding), hinge (uniaxial flexion/extension), pivot (uniaxial rotation), condyloid (biaxial angular motion), saddle (biaxial, thumb), and ball-and-socket (multiaxial, shoulder and hip).",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-4-synovial-joints",
-        prompt: "The first carpometacarpal joint at the base of the thumb is classified as which type of synovial joint?",
+        id: "q009", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The proximal radioulnar joint is structurally classified as which type of synovial joint?",
+        options: ["Pivot joint", "Hinge joint", "Saddle joint", "Condyloid joint"],
+        correct: 0,
+        explanation: "The proximal radioulnar joint is a uniaxial pivot joint allowing rotation."
+      },
+      {
+        id: "q010", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The first carpometacarpal joint at the base of the thumb is classified as a:",
         options: ["Saddle joint", "Hinge joint", "Pivot joint", "Condyloid joint"],
         correct: 0,
-        explanation: "The trapezium and first metacarpal articulate via a biaxial saddle joint, permitting thumb opposition."
+        explanation: "The trapezium and first metacarpal articulate via a biaxial saddle joint."
       },
       {
-        id: "art-06",
-        topic: "movements",
-        topicName: "Body Movements (9.5)",
-        passage: "Movements at synovial joints include angular, rotational, and special motions. Flexion reduces joint angle, while extension increases it. In the forearm, pronation turns the palm posteriorly so radius crosses ulna; supination returns it anteriorly.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-5-types-of-body-movements",
-        prompt: "Rotating the forearm so that the palm of the hand faces anteriorly in anatomical position is termed:",
-        options: ["Supination", "Pronation", "Eversion", "Inversion"],
+        id: "q011", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Which synovial joint classification features flat articulating surfaces that allow sliding or gliding motions?",
+        options: ["Plane (gliding) joint", "Pivot joint", "Condyloid joint", "Hinge joint"],
         correct: 0,
-        explanation: "Supination is the lateral rotation of the radius that positions the palm forward in anatomical position."
+        explanation: "Plane joints have flat surfaces permitting nonaxial gliding."
       },
       {
-        id: "art-07",
-        topic: "movements",
-        topicName: "Special Movements (9.5)",
-        passage: "Specialized movements include dorsiflexion and plantar flexion at the ankle talocrural joint, and inversion and eversion at the subtalar/intertarsal joints. Inversion angles the plantar sole inward toward the medial sagittal plane.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-5-types-of-body-movements",
-        prompt: "Tilting the sole of the foot laterally away from the midline is termed:",
-        options: ["Eversion", "Inversion", "Dorsiflexion", "Plantar flexion"],
+        id: "q012", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "An articulation with an oval convex surface fitting into an elliptical concave basin (such as the metacarpophalangeal joints) is a:",
+        options: ["Condyloid joint", "Hinge joint", "Pivot joint", "Plane joint"],
         correct: 0,
-        explanation: "Eversion turns the bottom of the foot outward, away from the midline."
+        explanation: "Condyloid (ellipsoid) joints are biaxial oval-and-socket joints."
       },
       {
-        id: "art-08",
-        topic: "joints",
-        topicName: "Knee Joint Anatomy (9.6)",
-        passage: "The femorotibial joint relies heavily on internal fibrocartilaginous pads called menisci. These C-shaped structures sit on the tibial condyles to provide shock absorption and deepen the articular surface for the femoral condyles.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "What is the structural role of the menisci situated between the femur and tibia in the knee joint?",
+        id: "q013", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "A uniaxial joint where a convex surface fits into a concave depression to permit only flexion and extension is a:",
+        options: ["Hinge joint", "Pivot joint", "Condyloid joint", "Saddle joint"],
+        correct: 0,
+        explanation: "Hinge joints (like the humeroulnar joint) operate uniaxially for flexion/extension."
+      },
+      {
+        id: "q014", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Moving a limb laterally away from the coronal midline of the body is termed:",
+        options: ["Abduction", "Adduction", "Flexion", "Circumduction"],
+        correct: 0,
+        explanation: "Abduction moves an extremity away from the midline."
+      },
+      {
+        id: "q015", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "A circular, cone-shaped movement combining flexion, abduction, extension, and adduction in continuous sequence is:",
+        options: ["Circumduction", "Rotation", "Supination", "Eversion"],
+        correct: 0,
+        explanation: "Circumduction moves the distal end of a limb in a circle while the proximal end stays relatively stationary."
+      },
+      {
+        id: "q016", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Medial rotation of the forearm so that the palm faces posteriorly or downward is termed:",
+        options: ["Pronation", "Supination", "Inversion", "Eversion"],
+        correct: 0,
+        explanation: "Pronation turns the radius across the ulna, placing the palm posteriorly."
+      },
+      {
+        id: "q017", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Lifting the foot at the ankle so that the superior surface of the foot approaches the anterior shin is:",
+        options: ["Dorsiflexion", "Plantar flexion", "Inversion", "Eversion"],
+        correct: 0,
+        explanation: "Dorsiflexion elevates the toes toward the leg."
+      },
+      {
+        id: "q018", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "An anterior gliding movement of a bone in the horizontal plane (e.g., pushing the mandible forward) is termed:",
+        options: ["Protraction", "Retraction", "Elevation", "Depression"],
+        correct: 0,
+        explanation: "Protraction moves a structure anteriorly in the horizontal plane."
+      },
+      {
+        id: "q019", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "What is the primary mechanical role of the menisci in the femorotibial (knee) joint?",
         options: [
           "Providing C-shaped fibrocartilaginous pads for shock absorption and joint congruency",
           "Secreting synovial fluid directly into the suprapatellar bursa",
@@ -378,37 +399,18 @@
           "Uniting the patella directly to the tibial tuberosity"
         ],
         correct: 0,
-        explanation: "The medial and lateral menisci are C-shaped fibrocartilage pads that absorb shock and enhance articulation congruency."
+        explanation: "The medial and lateral menisci are fibrocartilaginous discs providing cushioning and congruency."
       },
       {
-        id: "art-09",
-        topic: "joints",
-        topicName: "Shoulder Joint (9.6)",
-        passage: "The glenohumeral joint is a multiaxial ball-and-socket joint possessing the greatest mobility of any joint. Because the glenoid cavity is shallow, structural stability depends heavily on the glenoid labrum and four rotator cuff muscles (SITS).",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "Which group of muscle tendons provides dynamic stabilization to hold the humeral head within the shallow glenoid fossa?",
-        options: ["Rotator cuff (SITS)", "Adductor group", "Quadriceps femoris", "Hamstring tendon complex"],
-        correct: 0,
-        explanation: "The supraspinatus, infraspinatus, teres minor, and subscapularis (SITS) form the rotator cuff, providing dynamic stability."
-      },
-      {
-        id: "art-10",
-        topic: "joints",
-        topicName: "Elbow Joint Anatomy (9.6)",
-        passage: "The humeroulnar joint is a uniaxial hinge joint allowing only flexion and extension of the forearm. The trochlea of the humerus fits snugly into the deep C-shaped trochlear notch of the ulna.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
+        id: "q020", topic: "ch9", topicName: "Ch 9: Joints",
         prompt: "At the humeroulnar hinge joint, which specific humeral feature articulates with the trochlear notch of the ulna?",
         options: ["Trochlea", "Capitulum", "Coronoid fossa", "Olecranon fossa"],
         correct: 0,
-        explanation: "The spool-like trochlea of the humerus fits into the trochlear notch of the ulna to form the hinge joint."
+        explanation: "The spool-like trochlea of the humerus articulates with the trochlear notch of the ulna."
       },
       {
-        id: "art-11",
-        topic: "joints",
-        topicName: "Fibrocartilaginous Labra (9.6)",
-        passage: "Both the glenohumeral joint and the acetabulofemoral (hip) joint utilize fibrocartilage rings attached to the socket rims known as the glenoid labrum and acetabular labrum to deepen their sockets.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "What is the primary anatomical function of the acetabular and glenoid labra?",
+        id: "q021", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "What is the primary anatomical role of the acetabular and glenoid labra?",
         options: [
           "Fibrocartilaginous rims that deepen the ball-and-socket sockets to enhance stability",
           "Avascular hyaline plates that produce interstitial fluid",
@@ -416,22 +418,609 @@
           "Dense fibrous cords connecting the greater and lesser trochanters"
         ],
         correct: 0,
-        explanation: "The labra are fibrocartilaginous rims that deepen the glenoid cavity and acetabulum to stabilize ball-and-socket joints."
+        explanation: "The labra deepen the shallow glenoid and acetabular sockets."
       },
       {
-        id: "art-12",
-        topic: "joints",
-        topicName: "Atlantoaxial Joint (9.6)",
-        passage: "The articulation between the atlas (C1) and axis (C2) consists of a pivot joint where the odontoid process (dens) of the axis rotates within the anterior ring of the atlas, allowing shaking of the head side-to-side.",
-        readingUrl: "https://openstax.org/books/anatomy-and-physiology-2e/pages/9-6-anatomy-of-selected-synovial-joints",
-        prompt: "The articulation between the atlas (C1) and the dens of the axis (C2) is classified mechanically as which type of joint?",
-        options: ["Pivot joint", "Saddle joint", "Hinge joint", "Condyloid joint"],
+        id: "q022", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The talocrural joint between the distal tibia, fibula, and talus functions mechanically as a:",
+        options: [
+          "Uniaxial hinge joint executing dorsiflexion and plantar flexion",
+          "Multiaxial joint permitting inversion and eversion",
+          "Nonaxial plane joint for foot twisting",
+          "Biaxial condyloid joint"
+        ],
         correct: 0,
-        explanation: "The atlantoaxial joint is a uniaxial pivot joint allowing rotational movement of the head."
+        explanation: "The talocrural joint acts as a hinge joint exclusively for dorsiflexion and plantar flexion."
+      },
+      {
+        id: "q023", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Which specialized foot movement tilts the sole of the foot laterally away from the midline?",
+        options: ["Eversion", "Inversion", "Supination", "Plantar flexion"],
+        correct: 0,
+        explanation: "Eversion turns the sole of the foot laterally."
+      },
+      {
+        id: "q024", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Dislocation of the temporomandibular joint (TMJ) occurs when the mandibular condyle glides anteriorly past the:",
+        options: ["Articular tubercle", "Mandibular fossa", "Styloid process", "External acoustic meatus"],
+        correct: 0,
+        explanation: "During wide opening, the condyle can slip anterior to the articular tubercle."
+      },
+      {
+        id: "q025", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The vascular inner layer of the articular joint capsule that synthesizes and secretes lubricating fluid is the:",
+        options: ["Synovial membrane", "Fibrous capsule", "Articular cartilage", "Perichondrium"],
+        correct: 0,
+        explanation: "The synovial membrane lines the inner capsule and produces synovial fluid."
+      },
+      {
+        id: "q026", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "When an epiphyseal plate completely ossifies at skeletal maturity, the cartilaginous synchondrosis converts into an immovable bony:",
+        options: ["Synostosis", "Syndesmosis", "Symphysis", "Gomphosis"],
+        correct: 0,
+        explanation: "Bony fusions that replace synchondroses or sutures are called synostoses."
+      },
+      {
+        id: "q027", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "All interphalangeal joints of the fingers and toes operate mechanically as which type of synovial joint?",
+        options: ["Hinge joints", "Condyloid joints", "Pivot joints", "Plane joints"],
+        correct: 0,
+        explanation: "Interphalangeal joints are uniaxial hinge joints permitting flexion and extension."
+      },
+      {
+        id: "q028", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Elongated, double-walled synovial fluid sacs that wrap completely around tendons subjected to friction are called:",
+        options: ["Tendon sheaths", "Bursae", "Menisci", "Fat pads"],
+        correct: 0,
+        explanation: "Tendon sheaths are tube-like bursae wrapping tendons."
+      },
+      {
+        id: "q029", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "True or False: The atlantoaxial joint between C1 and the dens of C2 is a pivot joint allowing rotational shaking of the head.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: The odontoid process (dens) rotates within the ring of the atlas to shake the head 'no'."
+      },
+      {
+        id: "q030", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "True or False: The glenohumeral joint achieves its wide range of motion through a shallow socket and depends primarily on the rotator cuff for stability.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: The shallow glenoid fossa relies on dynamic tendon support from the rotator cuff."
+      },
+      {
+        id: "q031", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "What type of cartilage forms the protective, avascular cap covering articulating bone ends in synovial joints?",
+        options: ["Hyaline cartilage", "Fibrocartilage", "Elastic cartilage", "Calcified cartilage"],
+        correct: 0,
+        explanation: "Articular cartilage is specialized hyaline cartilage with a smooth, low-friction surface."
+      },
+      {
+        id: "q032", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "Which joint movement involves moving a body part posteriorly in the horizontal plane (e.g., returning the jaw back to resting position)?",
+        options: ["Retraction", "Protraction", "Depression", "Elevation"],
+        correct: 0,
+        explanation: "Retraction moves a protracted body part back to anatomical position."
+      },
+      {
+        id: "q033", topic: "ch9", topicName: "Ch 9: Joints",
+        prompt: "The articulation between the occipital condyles and the superior articular facets of the atlas (C1) is a:",
+        options: ["Condyloid joint", "Pivot joint", "Hinge joint", "Saddle joint"],
+        correct: 0,
+        explanation: "The atlanto-occipital joint is a condyloid joint permitting the nodding 'yes' motion."
+      },
+
+      /* ========================================================================= */
+      /* CHAPTER 10: MUSCLE TISSUE & CONTRACTION (QUESTIONS 34 - 67)               */
+      /* ========================================================================= */
+      {
+        id: "q034", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "In excitation-contraction coupling, what is the immediate event triggered by an action potential arriving at the somatic motor axon terminal?",
+        options: [
+          "Exocytosis of acetylcholine (ACh) into the synaptic cleft",
+          "Opening of voltage-gated Ca2+ channels in the T-tubules",
+          "Power stroke of the myosin cross-bridge",
+          "Inactivation of acetylcholinesterase"
+        ],
+        correct: 0,
+        explanation: "Axon terminal depolarization triggers voltage-gated calcium influx and exocytosis of acetylcholine."
+      },
+      {
+        id: "q035", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Binding of acetylcholine to nicotinic ligand-gated receptors on the motor end-plate immediately induces:",
+        options: [
+          "Influx of Na+ ions causing end-plate depolarization",
+          "Efflux of Ca2+ ions into the synaptic cleft",
+          "Pumping of K+ ions into the terminal cisternae",
+          "Direct phosphorylation of myosin heads"
+        ],
+        correct: 0,
+        explanation: "ACh opens cation channels; greater Na+ influx depolarizes the motor end-plate."
+      },
+      {
+        id: "q036", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Action potentials propagate across the sarcolemma and deep into the interior of a muscle fiber via the:",
+        options: ["Transverse tubules (T-tubules)", "Sarcoplasmic reticulum", "Endomysium", "Myofibrils"],
+        correct: 0,
+        explanation: "T-tubules are invaginations of the sarcolemma conducting electrical signals internally."
+      },
+      {
+        id: "q037", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Depolarization of T-tubules causes the release of stored calcium ions from the:",
+        options: ["Terminal cisternae of the sarcoplasmic reticulum", "Mitochondria", "Golgi apparatus", "Synaptic vesicles"],
+        correct: 0,
+        explanation: "The terminal cisternae of the sarcoplasmic reticulum store and release calcium."
+      },
+      {
+        id: "q038", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "During skeletal muscle contraction, calcium ions bind directly to which regulatory protein?",
+        options: ["Troponin", "Tropomyosin", "Myosin", "Actin"],
+        correct: 0,
+        explanation: "Calcium binds to troponin, causing a conformational change that moves tropomyosin."
+      },
+      {
+        id: "q039", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "The binding of energized myosin heads to exposed binding sites on actin filaments forms a:",
+        options: ["Cross-bridge", "Sarcomere triad", "Motor unit", "Gap junction"],
+        correct: 0,
+        explanation: "A myosin head bound to actin constitutes a cross-bridge."
+      },
+      {
+        id: "q040", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "The mechanical 'power stroke' of contraction occurs when which molecules detach from the myosin head?",
+        options: ["ADP and inorganic phosphate (Pi)", "ATP and Ca2+", "Acetylcholine and Na+", "Troponin and tropomyosin"],
+        correct: 0,
+        explanation: "Release of ADP and Pi triggers the pivotal bending (power stroke) of the myosin neck."
+      },
+      {
+        id: "q041", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "What molecule must bind to the myosin head to cause its detachment from the actin filament?",
+        options: ["ATP", "ADP", "Calcium", "Creatine phosphate"],
+        correct: 0,
+        explanation: "A new ATP molecule binds to myosin to break the cross-bridge."
+      },
+      {
+        id: "q042", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "The outermost dense connective tissue sheath enclosing an entire skeletal muscle organ is the:",
+        options: ["Epimysium", "Perimysium", "Endomysium", "Sarcolemma"],
+        correct: 0,
+        explanation: "The epimysium encloses the entire muscle organ."
+      },
+      {
+        id: "q043", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Skeletal muscle fibers are grouped into bundles called fascicles, which are encased by the:",
+        options: ["Perimysium", "Endomysium", "Epimysium", "Hypodermis"],
+        correct: 0,
+        explanation: "The perimysium wraps around muscle fascicles."
+      },
+      {
+        id: "q044", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Each individual skeletal muscle fiber is directly enveloped by a delicate layer of areolar tissue called the:",
+        options: ["Endomysium", "Perimysium", "Epimysium", "Aponeurosis"],
+        correct: 0,
+        explanation: "The endomysium is the delicate areolar connective tissue surrounding single fibers."
+      },
+      {
+        id: "q045", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Broad, flat sheet-like tendons that attach muscles to bone, cartilage, or neighboring fascia are termed:",
+        options: ["Aponeuroses", "Ligaments", "Retinacula", "Endomysial cords"],
+        correct: 0,
+        explanation: "Aponeuroses are flat, sheet-like fibrous tendon extensions."
+      },
+      {
+        id: "q046", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "The plasma membrane of a skeletal muscle fiber is specifically called the:",
+        options: ["Sarcolemma", "Sarcoplasm", "Sarcomere", "Sarcoplasmic reticulum"],
+        correct: 0,
+        explanation: "The muscle cell membrane is the sarcolemma."
+      },
+      {
+        id: "q047", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Within a sarcomere, thin actin filaments are anchored directly to the:",
+        options: ["Z disc", "M line", "H zone", "A band"],
+        correct: 0,
+        explanation: "Z discs form the borders of the sarcomere and anchor thin actin filaments."
+      },
+      {
+        id: "q048", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "According to the sliding filament model, which region of the sarcomere remains constant in length during contraction?",
+        options: ["A band", "I band", "H zone", "Distance between Z discs"],
+        correct: 0,
+        explanation: "The A band corresponds to the entire length of thick filaments and does not shorten."
+      },
+      {
+        id: "q049", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "In cardiac muscle, electrical depolarization passes directly between cells via gap junctions located within:",
+        options: ["Intercalated discs", "T-tubule triads", "Neuromuscular junctions", "Caveolae"],
+        correct: 0,
+        explanation: "Intercalated discs contain desmosomes and gap junctions for synchronized contraction."
+      },
+      {
+        id: "q050", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Which metabolic pathway provides an immediate high-energy phosphate source to regenerate ATP for the first ~15 seconds of intense effort?",
+        options: ["Creatine phosphate system", "Anaerobic glycolysis", "Aerobic respiration", "Lactate fermentation"],
+        correct: 0,
+        explanation: "Creatine phosphate donates a phosphate group to ADP via creatine kinase."
+      },
+      {
+        id: "q051", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Anaerobic glycolysis converts glucose into pyruvate/lactic acid, generating a net total of how many ATP molecules per glucose?",
+        options: ["2 ATP", "4 ATP", "32 ATP", "36 ATP"],
+        correct: 0,
+        explanation: "Glycolysis yields a net gain of 2 ATP per glucose molecule without oxygen."
+      },
+      {
+        id: "q052", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Slow oxidative (SO) muscle fibers are best characterized by:",
+        options: [
+          "High myoglobin content, abundant mitochondria, and high resistance to fatigue",
+          "Low capillary density and rapid glycogen depletion",
+          "Large fiber diameter and fast myosin ATPase activity",
+          "Predominant reliance on anaerobic glycolysis"
+        ],
+        correct: 0,
+        explanation: "Slow oxidative fibers are red, aerobic, rich in myoglobin and mitochondria, and fatigue-resistant."
+      },
+      {
+        id: "q053", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Fast glycolytic (FG) muscle fibers are characterized by:",
+        options: [
+          "Large fiber diameter, high glycogen stores, and rapid fatigue during short bursts",
+          "Dense capillary beds and high endurance capacity",
+          "Slow cross-bridge cycling and high myoglobin reserves",
+          "Abundant mitochondria for continuous aerobic work"
+        ],
+        correct: 0,
+        explanation: "Fast glycolytic fibers are large, pale, glycogen-rich, and fatigue quickly."
+      },
+      {
+        id: "q054", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "An isotonic contraction where tension remains constant while the muscle shortens to move a load is called a(n):",
+        options: ["Concentric contraction", "Eccentric contraction", "Isometric contraction", "Treppe contraction"],
+        correct: 0,
+        explanation: "Concentric contractions occur when muscle tension exceeds load and the muscle shortens."
+      },
+      {
+        id: "q055", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "An isotonic contraction where the muscle generates tension while actively lengthening (e.g., lowering a weight) is called a(n):",
+        options: ["Eccentric contraction", "Concentric contraction", "Isometric contraction", "Isometric twitch"],
+        correct: 0,
+        explanation: "Eccentric contractions occur when the muscle lengthens under controlled tension."
+      },
+      {
+        id: "q056", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "A contraction where internal muscle tension rises but muscle length and joint angle remain unchanged is called a(n):",
+        options: ["Isometric contraction", "Isotonic contraction", "Concentric contraction", "Eccentric contraction"],
+        correct: 0,
+        explanation: "Isometric contractions build tension without changing muscle length."
+      },
+      {
+        id: "q057", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "A continuous, sustained contraction without any visible relaxation phases resulting from rapid stimulus frequency is called:",
+        options: ["Complete (fused) tetanus", "Incomplete tetanus", "Twitch summation", "Treppe"],
+        correct: 0,
+        explanation: "Complete tetanus occurs when stimulation frequency eliminates relaxation entirely."
+      },
+      {
+        id: "q058", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "A single somatic motor neuron along with all the individual muscle fibers it innervates is defined as a:",
+        options: ["Motor unit", "Sarcomere", "Myofibril", "Synaptic terminal"],
+        correct: 0,
+        explanation: "A motor unit consists of one motor neuron and all muscle fibers it controls."
+      },
+      {
+        id: "q059", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "During the latent period of a single muscle twitch, what physiological event is taking place?",
+        options: [
+          "Action potential propagation and calcium release from the sarcoplasmic reticulum",
+          "Shortening of sarcomeres to peak tension",
+          "Active pumping of calcium back into terminal cisternae",
+          "Synthesis of glycogen from lactate"
+        ],
+        correct: 0,
+        explanation: "The latent period represents excitation-contraction coupling prior to cross-bridge tension development."
+      },
+      {
+        id: "q059b", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "What enzyme resides in the synaptic cleft to degrade acetylcholine and prevent continuous stimulation?",
+        options: ["Acetylcholinesterase", "Creatine kinase", "Myosin ATPase", "Adenylate cyclase"],
+        correct: 0,
+        explanation: "Acetylcholinesterase breaks down acetylcholine into acetate and choline."
+      },
+      {
+        id: "q060", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "In smooth muscle cells, calcium activates contraction by binding to which protein instead of troponin?",
+        options: ["Calmodulin", "Calsequestrin", "Myosin light-chain phosphatase", "Dystrophin"],
+        correct: 0,
+        explanation: "Smooth muscle lacks troponin; calcium binds calmodulin to activate myosin kinase."
+      },
+      {
+        id: "q061", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Single-unit (visceral) smooth muscle cells contract synchronously as a functional unit because they are interconnected by:",
+        options: ["Gap junctions", "Tight junctions", "Desmosomes", "Neuromuscular motor end-plates"],
+        correct: 0,
+        explanation: "Gap junctions allow direct electrical coupling across sheets of single-unit smooth muscle."
+      },
+      {
+        id: "q062", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Which red pigment protein stores reserve oxygen inside muscle fibers for aerobic respiration?",
+        options: ["Myoglobin", "Hemoglobin", "Cytochrome c", "Ferritin"],
+        correct: 0,
+        explanation: "Myoglobin binds and stores oxygen within sarcoplasm."
+      },
+      {
+        id: "q063", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "True or False: Rigor mortis occurs after death because ATP depletion prevents the detachment of myosin heads from actin.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: ATP is required to break cross-bridges; without it, actin and myosin remain locked."
+      },
+      {
+        id: "q064", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "True or False: Increasing contractile force by activating progressively larger numbers of motor units is called recruitment.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: Motor unit recruitment progressively increases force."
+      },
+      {
+        id: "q065", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "True or False: Multiunit smooth muscle is found in the walls of the stomach and small intestine to propel food via peristalsis.",
+        options: ["False", "True"],
+        correct: 0,
+        explanation: "False: The digestive tract consists of single-unit (visceral) smooth muscle. Multiunit muscle is found in large airways and the iris."
+      },
+      {
+        id: "q066", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "True or False: Postural muscles maintaining upright human stance consist predominantly of fast glycolytic (FG) fibers.",
+        options: ["False", "True"],
+        correct: 0,
+        explanation: "False: Postural muscles are rich in fatigue-resistant slow oxidative (SO) fibers."
+      },
+      {
+        id: "q067", topic: "ch10", topicName: "Ch 10: Muscle Tissue",
+        prompt: "Which skeletal muscle protein forms elastic filaments that anchor thick filaments to Z discs and assist with passive recoil?",
+        options: ["Titin", "Nebulin", "Dystrophin", "Myomesin"],
+        correct: 0,
+        explanation: "Titin is an enormous elastic protein stabilizing thick filaments."
+      },
+
+      /* ========================================================================= */
+      /* CHAPTER 11: THE MUSCULAR SYSTEM & REGIONAL ANATOMY (QUESTIONS 68 - 100)   */
+      /* ========================================================================= */
+      {
+        id: "q068", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The stationary, immovable attachment point of a skeletal muscle is its origin, while the movable bone attachment is the:",
+        options: ["Insertion", "Belly", "Fulcrum", "Aponeurosis"],
+        correct: 0,
+        explanation: "The insertion moves toward the origin during contraction."
+      },
+      {
+        id: "q069", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "In a functional muscle group, a muscle that directly aids the prime mover (agonist) by adding force or stabilizing an intermediate joint is a(n):",
+        options: ["Synergist", "Antagonist", "Fixator", "Inhibitor"],
+        correct: 0,
+        explanation: "Synergists assist agonists and prevent unwanted movements."
+      },
+      {
+        id: "q070", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "In anatomical lever systems, the joint acts as the fulcrum, the muscle generates effort, and the bone serves as the:",
+        options: ["Rigid lever arm", "Resistive load", "Tendon pulley", "Synovial hinge"],
+        correct: 0,
+        explanation: "Bones act as rigid levers moving around joint fulcrums."
+      },
+      {
+        id: "q071", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Most skeletal muscle levers in the human body (such as elbow flexion via biceps brachii) operate as which lever class?",
+        options: ["Third-class lever (Effort in middle)", "First-class lever (Fulcrum in middle)", "Second-class lever (Load in middle)", "Fourth-class lever"],
+        correct: 0,
+        explanation: "Third-class levers have the effort between fulcrum and load, maximizing speed and range."
+      },
+      {
+        id: "q072", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The four rotator cuff muscles providing dynamic stabilization to the shoulder joint are supraspinatus, infraspinatus, teres minor, and:",
+        options: ["Subscapularis", "Teres major", "Coracobrachialis", "Deltoid"],
+        correct: 0,
+        explanation: "The SITS muscles include supraspinatus, infraspinatus, teres minor, and subscapularis."
+      },
+      {
+        id: "q073", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The vertical, fibrous midline band of connective tissue separating the bilateral rectus abdominis muscles is the:",
+        options: ["Linea alba", "Tendinous intersection", "Rectus sheath", "Inguinal ligament"],
+        correct: 0,
+        explanation: "The linea alba is a fibrous cord running vertically down the anterior midline."
+      },
+      {
+        id: "q074", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The four heads of the quadriceps femoris group are the vastus lateralis, vastus medialis, vastus intermedius, and:",
+        options: ["Rectus femoris", "Biceps femoris", "Sartorius", "Gracilis"],
+        correct: 0,
+        explanation: "The quadriceps group consists of three vastus muscles and the rectus femoris."
+      },
+      {
+        id: "q075", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The three muscles comprising the posterior hamstring group that extend the hip and flex the knee are biceps femoris, semitendinosus, and:",
+        options: ["Semimembranosus", "Sartorius", "Gracilis", "Gastrocnemius"],
+        correct: 0,
+        explanation: "The hamstrings include biceps femoris, semitendinosus, and semimembranosus."
+      },
+      {
+        id: "q076", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which circular sphincter muscle encases the orbit and functions to close the eyelid during blinking?",
+        options: ["Orbicularis oculi", "Orbicularis oris", "Levator palpebrae superioris", "Frontalis"],
+        correct: 0,
+        explanation: "Orbicularis oculi closes the eye."
+      },
+      {
+        id: "q077", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which circular muscle surrounds the mouth to close and protrude the lips during kissing or whistling?",
+        options: ["Orbicularis oris", "Buccinator", "Zygomaticus major", "Masseter"],
+        correct: 0,
+        explanation: "Orbicularis oris puckers and closes the lips."
+      },
+      {
+        id: "q078", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which powerful muscle of mastication originates on the zygomatic arch and inserts into the mandibular ramus to elevate the jaw?",
+        options: ["Masseter", "Temporalis", "Medial pterygoid", "Buccinator"],
+        correct: 0,
+        explanation: "The masseter is the prime mover of jaw closure (elevation)."
+      },
+      {
+        id: "q079", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which two-headed neck muscle originates on the sternum and clavicle and inserts onto the mastoid process to flex and rotate the head?",
+        options: ["Sternocleidomastoid", "Splenius capitis", "Trapezius", "Scalene anterior"],
+        correct: 0,
+        explanation: "The sternocleidomastoid flexes the neck and turns the head contralaterally."
+      },
+      {
+        id: "q080", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The primary muscle of resting respiration, whose muscular dome flattens downward during contraction, is the:",
+        options: ["Diaphragm", "External intercostals", "Internal intercostals", "Transversus abdominis"],
+        correct: 0,
+        explanation: "The diaphragm flattens inferiorly during contraction to expand thoracic volume."
+      },
+      {
+        id: "q081", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The deepest muscle layer of the lateral abdominal wall, with horizontally oriented fibers that compress the abdomen, is the:",
+        options: ["Transversus abdominis", "Internal oblique", "External oblique", "Rectus abdominis"],
+        correct: 0,
+        explanation: "The transversus abdominis fibers run horizontally across the deep abdominal wall."
+      },
+      {
+        id: "q082", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which anterior arm muscle inserts onto the radial tuberosity and serves as a prime supinator as well as an elbow flexor?",
+        options: ["Biceps brachii", "Brachialis", "Brachioradialis", "Coracobrachialis"],
+        correct: 0,
+        explanation: "The biceps brachii flexes the elbow and supinates the flexed forearm."
+      },
+      {
+        id: "q083", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which three-headed posterior arm muscle inserts on the olecranon process of the ulna as the prime extensor of the elbow?",
+        options: ["Triceps brachii", "Biceps brachii", "Brachialis", "Anconeus"],
+        correct: 0,
+        explanation: "The triceps brachii is the prime mover for forearm extension."
+      },
+      {
+        id: "q084", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The longest strap-like muscle in the human body, crossing obliquely across the anterior thigh to flex the hip and knee, is the:",
+        options: ["Sartorius", "Gracilis", "Rectus femoris", "Tensor fasciae latae"],
+        correct: 0,
+        explanation: "The sartorius is the longest muscle, allowing one to sit 'cross-legged'."
+      },
+      {
+        id: "q085", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which superficial, two-headed calf muscle originates on the femoral condyles and plantar flexes the ankle?",
+        options: ["Gastrocnemius", "Soleus", "Tibialis posterior", "Fibularis longus"],
+        correct: 0,
+        explanation: "The gastrocnemius originates on the femoral condyles and inserts into the calcaneus."
+      },
+      {
+        id: "q086", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which cheek muscle compresses the cheek against the teeth during chewing and whistling?",
+        options: ["Buccinator", "Zygomaticus major", "Platysma", "Masseter"],
+        correct: 0,
+        explanation: "The buccinator compresses cheeks inward to keep food on occlusal surfaces."
+      },
+      {
+        id: "q087", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which rotator cuff muscle initiates the first 15 degrees of arm abduction at the glenohumeral joint?",
+        options: ["Supraspinatus", "Infraspinatus", "Teres minor", "Subscapularis"],
+        correct: 0,
+        explanation: "The supraspinatus initiates shoulder abduction before the deltoid takes over."
+      },
+      {
+        id: "q088", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which large, broad posterior muscle of the back extends, adducts, and medially rotates the humerus ('swimmer's muscle')?",
+        options: ["Latissimus dorsi", "Trapezius", "Rhomboid major", "Pectoralis major"],
+        correct: 0,
+        explanation: "The latissimus dorsi is a broad back muscle that pulls the humerus down and back."
+      },
+      {
+        id: "q089", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which anterior brachial muscle lies deep to the biceps brachii and inserts on the ulnar coronoid process as a pure elbow flexor?",
+        options: ["Brachialis", "Brachioradialis", "Coracobrachialis", "Pronator teres"],
+        correct: 0,
+        explanation: "The brachialis inserts on the ulna and flexes the forearm in all positions."
+      },
+      {
+        id: "q090", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "The rectus abdominis muscle is divided into distinct muscular segments by horizontal fibrous bands called:",
+        options: ["Tendinous intersections", "Linea alba", "Rectus sheath", "Aponeuroses"],
+        correct: 0,
+        explanation: "Tendinous intersections partition the rectus abdominis into segmented bellies ('six-pack')."
+      },
+      {
+        id: "q091", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which muscle forms the primary bulk of the buttocks and acts as the chief extensor of the thigh during climbing or rising from a seat?",
+        options: ["Gluteus maximus", "Gluteus medius", "Gluteus minimus", "Piriformis"],
+        correct: 0,
+        explanation: "Gluteus maximus powerfully extends and laterally rotates the femur."
+      },
+      {
+        id: "q092", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which head of the quadriceps femoris originates on the anterior inferior iliac spine, allowing it to flex the hip and extend the knee?",
+        options: ["Rectus femoris", "Vastus lateralis", "Vastus medialis", "Vastus intermedius"],
+        correct: 0,
+        explanation: "Rectus femoris crosses two joints: hip (flexion) and knee (extension)."
+      },
+      {
+        id: "q093", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which lateral hamstring muscle inserts onto the head of the fibula and laterally rotates the flexed leg?",
+        options: ["Biceps femoris", "Semitendinosus", "Semimembranosus", "Gracilis"],
+        correct: 0,
+        explanation: "The biceps femoris sits laterally in the hamstring group and inserts on the fibular head."
+      },
+      {
+        id: "q094", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "Which anterior leg muscle originates on the lateral tibia and performs dorsiflexion and inversion of the foot?",
+        options: ["Tibialis anterior", "Gastrocnemius", "Fibularis longus", "Soleus"],
+        correct: 0,
+        explanation: "The tibialis anterior pulls the toes up (dorsiflexion) and turns the sole inward (inversion)."
+      },
+      {
+        id: "q095", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: Both the masseter and temporalis muscles elevate the mandible to close the jaw during mastication.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: Both powerful mastication muscles elevate the mandible."
+      },
+      {
+        id: "q096", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: The serratus anterior attaches to the ribs and medial border of the scapula, protracting the shoulder forward during pushing.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: The serratus anterior ('boxer's muscle') pulls the scapula forward around the thorax."
+      },
+      {
+        id: "q097", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: The biceps brachii is a more powerful supinator of the flexed forearm than the supinator muscle.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: When the elbow is flexed to 90 degrees, biceps brachii is the strongest supinator."
+      },
+      {
+        id: "q098", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: Muscles in the anterior compartment of the forearm typically act as wrist and finger extensors.",
+        options: ["False", "True"],
+        correct: 0,
+        explanation: "False: The anterior forearm compartment contains flexors; the posterior compartment contains extensors."
+      },
+      {
+        id: "q099", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: Both the gastrocnemius and soleus muscles insert into the calcaneus via the calcaneal (Achilles) tendon.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: Gastrocnemius and soleus fuse into the calcaneal tendon to execute plantar flexion."
+      },
+      {
+        id: "q100", topic: "ch11", topicName: "Ch 11: Muscular System",
+        prompt: "True or False: The gracilis is an adductor located on the medial aspect of the thigh.",
+        options: ["True", "False"],
+        correct: 0,
+        explanation: "True: Gracilis is a long medial thigh muscle that adducts the femur."
       }
     ];
 
-    const STORAGE_KEY = "openstax_ap1_joints_mastery_v2";
+    const STORAGE_KEY = "openstax_ap1_unit3_mastery_100q";
     let masteryData = loadMastery();
     let currentTopicFilter = "all";
     let activeQuestion = null;
@@ -440,8 +1029,6 @@
     const questionCard = document.getElementById("questionCard");
     const completedCard = document.getElementById("completedCard");
     const questionTag = document.getElementById("questionTag");
-    const passageText = document.getElementById("passageText");
-    const readingLink = document.getElementById("readingLink");
     const questionPrompt = document.getElementById("questionPrompt");
     const optionsList = document.getElementById("optionsList");
     const feedbackBox = document.getElementById("feedbackBox");
@@ -453,6 +1040,7 @@
     const statRemaining = document.getElementById("statRemaining");
     const statMastered = document.getElementById("statMastered");
     const statTotal = document.getElementById("statTotal");
+    const statPercent = document.getElementById("statPercent");
 
     function loadMastery() {
       try {
@@ -489,10 +1077,12 @@
       const totalInPool = getTopicPool(currentTopicFilter).length;
       const unmastered = getUnmasteredPool(currentTopicFilter).length;
       const mastered = totalInPool - unmastered;
+      const pct = totalInPool > 0 ? Math.round((mastered / totalInPool) * 100) : 0;
 
       statRemaining.textContent = unmastered;
       statMastered.textContent = mastered;
       statTotal.textContent = totalInPool;
+      statPercent.textContent = `${pct}%`;
     }
 
     function loadNextQuestion() {
@@ -519,8 +1109,6 @@
       activeQuestion = availablePool[randomIndex];
 
       questionTag.textContent = activeQuestion.topicName;
-      passageText.textContent = activeQuestion.passage;
-      readingLink.href = activeQuestion.readingUrl;
       questionPrompt.textContent = activeQuestion.prompt;
 
       const mappedOptions = activeQuestion.options.map((text, idx) => ({
@@ -602,7 +1190,7 @@
     });
 
     resetMasteryBtn.addEventListener("click", () => {
-      if (confirm("Reset mastery for this module?")) {
+      if (confirm("Reset all mastery progress for this review?")) {
         masteryData = {};
         saveMastery();
         loadNextQuestion();
